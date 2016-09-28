@@ -42,7 +42,7 @@ server {
 
 以上匹配规则就说明最后带`.php`的执行以下操作。
 
-实际上，nginx本身不支持调用解析php的进程，所以必须通过
+实际上，nginx本身是不支持调用解析php的进程，所以必须通过一个通用的接口来调起守护进程进行php解析，这个就是FastCGI。所谓FastCGI，就是在Http server（例如nginx）和动态脚本语言（例如php）中间通信的的接口。它负责
 > ## nginx配置
 
 这里为了区别我装的两个版本的php，所以给php5解析的用域名`php5.host`，php7解析则用`php7.host`域名。
