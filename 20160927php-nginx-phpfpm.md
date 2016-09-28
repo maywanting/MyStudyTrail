@@ -42,8 +42,15 @@ server {
 
 以上匹配规则就说明最后带`.php`的执行以下操作。
 
-实际上，nginx本身是不支持调用解析php的进程，所以必须通过一个通用的接口来调起守护进程进行php解析，这个就是FastCGI。所谓FastCGI，就是在Http server（例如nginx）和动态脚本语言（例如php）中间通信的的接口。它负责
+实际上，nginx本身是不支持调用解析php，所以必须通过一个通用的接口来调起守护进程进行php解析，这个就是FastCGI。所谓FastCGI，就是在Http server（例如nginx）和动态脚本语言（例如php）中间通信的的接口。它负责启用一个或多个叫做FastCGI进程管理器的守护进程来解析php，而php-fpm就是FastCGI进程管理器中处理php的一种，也是处理php最常用的一种，至少目前的php都把php-fpm都一起编译进了内核。
+
+所以nginx在处理动态脚本的时候就是一个反向代理服务器，自身处理一些静态请求（例如请求文件），然后将所有需要脚本语言解析的动态请求（例如php，python）全部交给FastCGI接口。
+
+FastCGI进程管理器与nginx通信则是通过socket，文件socket和ip socket都可以，所以一个FastCGI进程管理器就会监听一个socket文件或者一个端口，且不能重复占用。
+
 > ## nginx配置
+
+接下来开始动手配置两个版本的php，根据上面的知识，其实做到支持两个版本的php就是将两个请求的url单独分开处理，交给两个不同的php-fpm进程，而且分别使用不同的socket通信。
 
 这里为了区别我装的两个版本的php，所以给php5解析的用域名`php5.host`，php7解析则用`php7.host`域名。
 
