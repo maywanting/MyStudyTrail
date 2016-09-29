@@ -26,7 +26,7 @@ $ git config --global user.email "maywanting@gmail.com"
 
 还有一种则是直接修改配置文件，git的全局配置则是在文件 `~\.gitignore`中,文件的内容是
 
-``` config
+``` bash
 [user]
         name = may
         email = maywanting@gmail.com

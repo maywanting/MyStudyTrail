@@ -15,14 +15,14 @@ categories:
 
 主管给我我root账号和ip地址，然后让我随便折腾吧，我等进去之后，第一件是就是查看这个服务器的基本信息，不然连啥类型的linux就开始动手，虽然我也不太清楚各种linux之间的细微区别，但是问题查资料的时候也很方便呢。
 
-``` shell
+``` bash
 > uname -a
 < Linux localhost.localdomain 2.6.32-642.1.1.el6.x86_64 #1 SMP Tue May 31 21:57:07 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
 ```
 
 当然也可以查看服务器的版本文件来获取具体信息
 
-``` shell
+``` bash
 > cat /proc/version
 < Linux version 2.6.32-642.1.1.el6.x86_64 (mockbuild@worker1.bsys.centos.org) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-17) (GCC) ) #1 SMP Tue May 31 21:57:07 UTC 2016
 ```
@@ -35,13 +35,13 @@ categories:
 
 首先创建用户may
 
-``` shell
+``` bash
 adduser may
 ```
 
 其次是密码
 
-``` shell
+``` bash
 passwd *
 ```
 
@@ -49,31 +49,31 @@ passwd *
 
 > ##将 may 加入 root 组
 
-``` shell
+``` bash
 usermod -g root May
 ```
 
 这样就可以把 may 这个用户加入到 root 组了，不过还可以设置sudo不用输入密码，这在之后的文章再介绍吧。
 
-> ##更改shell
+> ##更改bash
 
-进入服务器的时候，shell则是最常用的 bash shell，不过我用的最舒服的还是 oh-my-zsh，所以肯定要改。
+进入服务器的时候，bash则是最常用的 bash bash，不过我用的最舒服的还是 oh-my-zsh，所以肯定要改。
 
 oh-my-zsh 是基于 zsh 的，所以首先装 zsh
 
-``` shell
+``` bash
 yum install zsh
 ```
 
 然后装 oh-my-zsh
 
-``` shell
+``` bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ```
 
 接下来我不太喜欢拘泥于一种主题，所以设为随机
 
-``` shell
+``` bash
 cd ~
 vim .zshrc
 
@@ -88,7 +88,7 @@ ZSH_THEME="random"
 
 由于zsh-syntax-highlighting这个插件不是oh-my-zsh自带插件，得去github上下载。
 
-``` shell
+``` bash
 cd ~/.oh-my-zsh/plugins/
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 
@@ -101,7 +101,7 @@ plugins=(git colored-man-pages sudo zsh-syntax-highlighting)
 
 vim是我最主要的编程工具，所以肯定得装这个
 
-``` shell
+``` bash
 git clone https://github.com/MikeCoder/k-vim.git
 ```
 
@@ -113,7 +113,7 @@ git clone https://github.com/MikeCoder/k-vim.git
 
 主要用`xmodmap`这个命令进行改键位。首先创个文件，比如我这里起名`.keymaps`，然后编辑
 
-``` shell
+``` bash
 !
 !Swap Caps_Lock and Escape
 !
@@ -131,7 +131,7 @@ add Lock = Caps_Lock
 
 首先在本地生成密钥对
 
-``` shell
+``` bash
 ssh-keygen -t rsa -P ""
 ```
 然后进入.ssh目录里面，里面应该有三个文件`id_rsa`, `id_rsa.pub`, `known_hosts`。这里面`id_rsa`为私钥，而`id_rsa.pub`为公钥，然后将公钥复制到服务器上，并将公钥的内容添加到`~/.ssh/authorized_keys`文件中，没有这个文件就创个。
@@ -140,7 +140,7 @@ ssh-keygen -t rsa -P ""
 
 在服务器的`/etc/ssh/sshd_config`的文件中，改成如下
 
-``` shell
+``` bash
 #PasswordAuthentication yes
 
 改为
