@@ -4,7 +4,7 @@ tags:
 - chat
 - deploy
 categories:
-- life
+- experience
 ---
 
 今天刚把一个项目部署完，所以写一篇博客纪念一下，因为，这个项目能搭起来实在是太不容易了。
