@@ -15,13 +15,26 @@ categories:
 ``` php
 $array = ['1', '2', '3'];
 foreach($array => &$value) {}
-var_dump($value);
+print_r($value);
 
 foreach($array => $value) {}
-var_dump($value);
+print_r($value);
 ```
 
 这段代码的输出呢是这个样子的。
+
+``` json
+Array
+(
+    [1] => one
+    [2] => two
+)
+Array
+(
+    [1] => one
+    [2] => one
+)
+```
 
 > ##缘起
 
