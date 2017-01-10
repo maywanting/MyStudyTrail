@@ -152,7 +152,17 @@ foreach ($arr as $key => $value) {
 
 好在鸟哥有一篇博客写了![关于foreach的原理](http://www.laruence.com/2008/11/20/630.html)
 
+按照鸟哥的这篇博客的思路，foreach实际上是被这么解析的
 
+``` C
+T_FOREACH '(' variable T_AS   { zend_do_foreach_begin('foreach', '(', $arr, 'as', 1 TSRMLS_CC); } foreach_variable  foreach_optional_arg(T_DOUBLE_ARROW  foreach_variable)   ')'
+{ zend_do_foreach_cont('foreach', '(', 'as', $key, $val TSRMLS_CC); }
+//循环体内语句
+{zend_do_foreach_end('foreach', 'as');}')}}')'
+```
 
+所以不难看出，foreach最重要的就是`zend_do_foreach_begin`,`zend_do_foreach_cont`, `zend_do_foreach_end`这个三个函数，具体这三个函数是干啥的，还是看鸟哥的博客或者自己看源代码吧，不是这篇文章的重点
+
+http://www.dataguru.cn/article-9116-1.html
 
 http://www.laruence.com/2008/11/20/630.html
